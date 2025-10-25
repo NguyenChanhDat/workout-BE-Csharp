@@ -1,0 +1,90 @@
+## build results
+bin/
+obj/
+out/
+[Bb]uild/
+[Ll]og/
+
+## visual studio files
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## dotnet artifacts
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.nuget.props
+*.nuget.targets
+
+## nuget packages
+*.nupkg
+*.snupkg
+# exclude if you use a local packages folder
+# packages/
+
+## test results
+[Tt]est[Rr]esult*/
+*.VisualState.xml
+*.TestResult.xml
+*.coverage
+*.coveragexml
+*.trx
+
+## generated files
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+*.cache
+*.dbmdl
+*.dbproj.schemaview
+
+## resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+## rider
+.idea/
+
+## other ide
+*.sublime-project
+*.sublime-workspace
+
+## tooling
+*.tsscache
+*.tscache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+## others
+.DS_Store
+Thumbs.db
+*.bak
+*.swp
+*.orig
+
+## docker
+docker-compose.override.yml
+.env
