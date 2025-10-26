@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using dotenv.net;
 
-class DatabaseContext : DbContext
+public class DatabaseContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
