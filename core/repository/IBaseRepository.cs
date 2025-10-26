@@ -1,4 +1,4 @@
-interface IBaseRepository<Entity>
+public interface IBaseRepository<Entity>
 {
     Task<Entity?> GetOneById(int id);
     Task<List<Entity>> GetAll();
