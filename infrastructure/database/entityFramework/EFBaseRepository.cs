@@ -40,5 +40,6 @@ public class EFBaseRepository<Entity> : IBaseRepository<Entity> where Entity : c
     public async Task Update(Entity entity)
     {
         _dbSet.Update(entity);
+        await Task.CompletedTask;
     }
 }
