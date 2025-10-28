@@ -5,7 +5,9 @@ public class DatabaseContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        DotEnv.Load();
+        var root = Directory.GetCurrentDirectory();
+        var dotenvPath = Path.Combine(root, "..", ".env");
+        DotEnv.Load(new DotEnvOptions(envFilePaths: [dotenvPath]));
 
         string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING") ?? "";
         optionsBuilder.UseSqlServer(connectionString);

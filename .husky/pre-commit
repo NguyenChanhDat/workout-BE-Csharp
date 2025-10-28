@@ -1,6 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-dotnet build
+dotnet build ./src/FirstNETWebApp.csproj
 
-dotnet format ../FirstNETWebApp.sln --verify-no-changes
+dotnet format ./src/FirstNETWebApp.csproj --verify-no-changes

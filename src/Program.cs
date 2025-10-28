@@ -4,7 +4,7 @@ class Program
     static void Main()
     {
         using var db = new DatabaseContext();
-        Console.WriteLine("db " + db.Database.CanConnect());
-        Console.WriteLine("Database ready");
+        Console.WriteLine("db Connect: " + db.Database.CanConnect());
+        // Console.WriteLine("Database ready");
     }
 }
