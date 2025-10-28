@@ -11,20 +11,20 @@ public class EFBaseRepository<Entity> : IBaseRepository<Entity> where Entity : c
         _dbSet = context.Set<Entity>();
     }
 
-    public async Task Create(Entity entity)
+    public async Task<Entity> Create(Entity entity)
     {
-        await _dbSet.AddAsync(entity);
-        await _context.SaveChangesAsync();
+        var entityAdded = await _dbSet.AddAsync(entity);
+        return entityAdded.Entity;
     }
 
-    public async Task Delete(int id)
+    public async Task<Entity?> Delete(int id)
     {
         var entity = await _dbSet.FindAsync(id);
         if (entity != null)
         {
             _dbSet.Remove(entity);
-            await _context.SaveChangesAsync();
         }
+        return entity;
     }
 
     public async Task<List<Entity>> GetAll()
@@ -40,6 +40,5 @@ public class EFBaseRepository<Entity> : IBaseRepository<Entity> where Entity : c
     public async Task Update(Entity entity)
     {
         _dbSet.Update(entity);
-        await _context.SaveChangesAsync();
     }
 }
