@@ -1,18 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using dotenv.net;
 
-public class DatabaseContext : DbContext
+public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options)
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        var root = Directory.GetCurrentDirectory();
-        var dotenvPath = Path.Combine(root, "..", ".env");
-        DotEnv.Load(new DotEnvOptions(envFilePaths: [dotenvPath]));
-
-        string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING") ?? "";
-        optionsBuilder.UseSqlServer(connectionString);
-    }
-
     public virtual DbSet<BodyTrack> BodyTracks { get; set; }
 
     public virtual DbSet<Exercise> Exercises { get; set; }
