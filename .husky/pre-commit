@@ -3,4 +3,8 @@
 
 dotnet build ./src/FirstNETWebApp.csproj
 
+dotnet build ./tests/FirstNETWebApp.Tests.csproj
+
 dotnet format ./src/FirstNETWebApp.csproj --verify-no-changes
+
+dotnet format ./tests/FirstNETWebApp.Tests.csproj --verify-no-changes
