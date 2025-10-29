@@ -116,15 +116,20 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.MembershipTier)
+                .HasConversion<string>()
                 .HasMaxLength(50)
-                .HasDefaultValue("Basic")
-                .HasColumnName("membershipTier");
+                .HasDefaultValue(MembershipTierEnum.Basic)
+                .HasColumnName("membershipTier")
+                .IsRequired();
             entity.Property(e => e.Password)
                 .HasMaxLength(255)
                 .HasColumnName("password");
             entity.Property(e => e.Username)
                 .HasMaxLength(255)
                 .HasColumnName("username");
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .HasColumnName("email");
         });
 
     }

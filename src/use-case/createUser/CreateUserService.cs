@@ -3,16 +3,18 @@ public class CreateUserService(IUnitOfWork _unitOfWork, IUserRepository _userRep
     public async Task<CreateUserResponse> CreateUserAsync(CreateUserRequest request)
     {
         var passwordHashed = await _hashService.HashPassword(request.Password);
-        var user = new User
-        {
-            Username = request.Username,
-            Email = request.Email,
-            Password = passwordHashed
-        };
+        User? user = null;
         await _unitOfWork.ExecuteAsync(async () =>
          {
-             await _userRepository.Create(user);
+             user = await _userRepository.Create(new User
+             {
+                 Username = request.Username,
+                 Email = request.Email,
+                 Password = passwordHashed,
+                 MembershipTier = request.MembershipTier ?? MembershipTierEnum.Basic
+             });
          });
+        if (user is null) throw new Exception("User creation failed");
 
         return new CreateUserResponse(user.Id, user.Username, user.Email, user.MembershipTier);
     }

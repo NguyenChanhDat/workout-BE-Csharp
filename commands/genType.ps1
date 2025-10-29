@@ -30,4 +30,5 @@ dotnet ef dbcontext scaffold `
     --context-dir ./infrastructure/database/entityFramework/ `
     --context AppDbContext `
     --no-onconfiguring `
-    --force
+    --force `
+    --project .\src\FirstNETWebApp.csproj

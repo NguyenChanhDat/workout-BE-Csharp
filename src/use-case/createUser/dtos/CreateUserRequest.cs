@@ -1,1 +1,1 @@
-public record CreateUserRequest(string Username, string Email, string Password);
+public record CreateUserRequest(string Username, string Email, string Password, MembershipTierEnum? MembershipTier);

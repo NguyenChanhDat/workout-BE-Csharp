@@ -1,4 +1,5 @@
 // Program.cs
+using System.Text.Json.Serialization;
 using dotenv.net;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,12 +33,20 @@ class Program
         builder.Services.AddControllers();
         builder.Services.AddOpenApi();
 
+        builder.Services.AddControllers()
+            .AddJsonOptions(opt =>
+            {
+                opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
+
+
         var app = builder.Build();
         app.Environment.ApplicationName = "FirstNETWebApp";
         app.Environment.EnvironmentName = "Development";
 
 
         Console.WriteLine("app.Environment.IsDevelopment() " + app.Environment.IsDevelopment());
+        Console.WriteLine("membershipTier: " + MembershipTierEnum.Basic.ToString());
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
@@ -50,7 +59,7 @@ class Program
 
         app.MapGet("/", () => "Hello World!");
         // app.UseHttpsRedirection();
-        // app.MapControllers();
+        app.MapControllers();
         app.Run($"http://localhost:{port}");
     }
 }
