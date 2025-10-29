@@ -1,16 +1,5 @@
-class CreateUserService : ICreateUserService
+class CreateUserService(IUnitOfWork _unitOfWork, IUserRepository _userRepository, IHashService _hashService) : ICreateUserService
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IUserRepository _userRepository;
-    private readonly IHashService _hashService;
-
-    public CreateUserService(IUnitOfWork unitOfWork, IUserRepository userRepository, IHashService hashService)
-    {
-        _unitOfWork = unitOfWork;
-        _userRepository = userRepository;
-        _hashService = hashService;
-    }
-
     public async Task<CreateUserResponse> CreateUserAsync(CreateUserRequest request)
     {
         var passwordHashed = await _hashService.HashPassword(request.Password);
