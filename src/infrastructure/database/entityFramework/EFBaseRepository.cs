@@ -1,15 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 
-public class EFBaseRepository<Entity> : IBaseRepository<Entity> where Entity : class
+public class EFBaseRepository<Entity>(DatabaseContext context) : IBaseRepository<Entity> where Entity : class
 {
-    private readonly DatabaseContext _context;
-    private readonly DbSet<Entity> _dbSet;
-
-    public EFBaseRepository(DatabaseContext context)
-    {
-        _context = context;
-        _dbSet = context.Set<Entity>();
-    }
+    private readonly DbSet<Entity> _dbSet = context.Set<Entity>();
 
     public async Task<Entity> Create(Entity entity)
     {
