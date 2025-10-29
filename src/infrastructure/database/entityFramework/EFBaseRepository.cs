@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 public class EFBaseRepository<Entity>(DatabaseContext context) : IBaseRepository<Entity> where Entity : class
 {
-    private readonly DbSet<Entity> _dbSet = context.Set<Entity>();
+    protected readonly DbSet<Entity> _dbSet = context.Set<Entity>();
 
     public async Task<Entity> Create(Entity entity)
     {

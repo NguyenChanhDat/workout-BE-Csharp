@@ -1,4 +1,4 @@
-class CreateUserService(IUnitOfWork _unitOfWork, IUserRepository _userRepository, IHashService _hashService) : ICreateUserService
+public class CreateUserService(IUnitOfWork _unitOfWork, IUserRepository _userRepository, IHashService _hashService) : ICreateUserService
 {
     public async Task<CreateUserResponse> CreateUserAsync(CreateUserRequest request)
     {

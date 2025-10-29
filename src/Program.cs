@@ -7,7 +7,7 @@ class Program
     static void Main(string[] args)
     {
 
-        var builder = WebApplication.CreateBuilder(args);
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
         var root = Directory.GetCurrentDirectory();
         var dotenvPath = Path.Combine(root, "..", ".env");
 
@@ -25,6 +25,11 @@ class Program
         });
 
         var app = builder.Build();
+
+        // DI Configuration
+        InfrastructureProvider.ConfigureServices(builder);
+        ServiceProvider.ConfigureServices(builder);
+
         app.MapGet("/", () => "Hello World!");
         app.Run($"http://localhost:{port}");
     }

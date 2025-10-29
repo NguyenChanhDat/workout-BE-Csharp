@@ -1,12 +1,5 @@
-public class EfUnitOfWork : IUnitOfWork
+public class EfUnitOfWork(DatabaseContext _context) : IUnitOfWork
 {
-    private readonly DatabaseContext _context;
-
-    public EfUnitOfWork(DatabaseContext context)
-    {
-        _context = context;
-    }
-
     public async Task ExecuteAsync(Func<Task> operation)
     {
         using var transaction = await _context.Database.BeginTransactionAsync();
