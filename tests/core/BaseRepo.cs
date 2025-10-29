@@ -10,8 +10,8 @@ public class BaseRepoTest
         var mockUserRepository = new Mock<IBaseRepository<User>>();
         mockUserRepository.Setup(r => r.GetAll()).ReturnsAsync(new List<User>
         {
-            new User { Id = 1, Username = "Mock User", Password = "password" },
-            new User { Id = 2, Username = "Mock User 2", Password = "password" }
+            new() { Id = 1, Username = "Mock User", Password = "password" },
+            new() { Id = 2, Username = "Mock User 2", Password = "password" }
         });
 
         var users = await mockUserRepository.Object.GetAll();

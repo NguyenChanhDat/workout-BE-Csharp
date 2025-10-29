@@ -14,8 +14,8 @@ class MockUserRepository : IBaseRepository<User>
     {
         var userList = new List<User>
         {
-            new User { Id = 1, Username = "Mock User", Password = "password" },
-            new User { Id = 2, Username = "Mock User 2", Password = "password" }
+            new() { Id = 1, Username = "Mock User", Password = "password" },
+            new() { Id = 2, Username = "Mock User 2", Password = "password" }
         };
         return Task.FromResult(userList);
     }
