@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using dotenv.net;
 
 public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options)
 {

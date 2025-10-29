@@ -24,13 +24,33 @@ class Program
             Console.WriteLine("Database connected: " + option.IsConfigured);
         });
 
-        var app = builder.Build();
-
         // DI Configuration
         InfrastructureProvider.ConfigureServices(builder);
         ServiceProvider.ConfigureServices(builder);
+        UseCaseProvider.ConfigureServices(builder);
+
+        builder.Services.AddControllers();
+        builder.Services.AddOpenApi();
+
+        var app = builder.Build();
+        app.Environment.ApplicationName = "FirstNETWebApp";
+        app.Environment.EnvironmentName = "Development";
+
+
+        Console.WriteLine("app.Environment.IsDevelopment() " + app.Environment.IsDevelopment());
+        if (app.Environment.IsDevelopment())
+        {
+            app.MapOpenApi();
+            app.UseSwaggerUi(options =>
+            {
+                options.DocumentPath = "/openapi/v1.json";
+            });
+        }
+
 
         app.MapGet("/", () => "Hello World!");
+        // app.UseHttpsRedirection();
+        // app.MapControllers();
         app.Run($"http://localhost:{port}");
     }
 }
