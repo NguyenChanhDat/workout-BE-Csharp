@@ -8,7 +8,7 @@
 
     public string Password { get; set; } = null!;
 
-    public string MembershipTier { get; set; } = null!;
+    public MembershipTierEnum MembershipTier { get; set; } = MembershipTierEnum.Basic;
 
     public virtual ICollection<BodyTrack> BodyTracks { get; set; } = new List<BodyTrack>();
 

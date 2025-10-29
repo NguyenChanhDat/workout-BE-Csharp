@@ -1,1 +1,1 @@
-public record CreateUserResponse(int Id, string Username, string Email, string MembershipTier);
+public record CreateUserResponse(int Id, string Username, string Email, MembershipTierEnum MembershipTier);

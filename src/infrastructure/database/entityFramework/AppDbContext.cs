@@ -1,18 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using dotenv.net;
 
-public class DatabaseContext : DbContext
+public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options)
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        var root = Directory.GetCurrentDirectory();
-        var dotenvPath = Path.Combine(root, "..", ".env");
-        DotEnv.Load(new DotEnvOptions(envFilePaths: [dotenvPath]));
-
-        string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING") ?? "";
-        optionsBuilder.UseSqlServer(connectionString);
-    }
-
     public virtual DbSet<BodyTrack> BodyTracks { get; set; }
 
     public virtual DbSet<Exercise> Exercises { get; set; }
@@ -127,15 +116,20 @@ public class DatabaseContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.MembershipTier)
+                .HasConversion<string>()
                 .HasMaxLength(50)
-                .HasDefaultValue("Basic")
-                .HasColumnName("membershipTier");
+                .HasDefaultValue(MembershipTierEnum.Basic)
+                .HasColumnName("membershipTier")
+                .IsRequired();
             entity.Property(e => e.Password)
                 .HasMaxLength(255)
                 .HasColumnName("password");
             entity.Property(e => e.Username)
                 .HasMaxLength(255)
                 .HasColumnName("username");
+            entity.Property(e => e.Email)
+                .HasMaxLength(100)
+                .HasColumnName("email");
         });
 
     }

@@ -4,10 +4,13 @@
   "tools": {
     "husky": {
       "version": "0.7.2",
-      "commands": [
-        "husky"
-      ],
+      "commands": ["husky"],
       "rollForward": false
+    },
+    "dotnet-aspnet-codegenerator": {
+      "version": "9.0.0",
+      "commands": ["dotnet-aspnet-codegenerator"],
+      "rollForward": true
     }
   }
 }
