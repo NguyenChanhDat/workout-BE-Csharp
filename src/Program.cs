@@ -25,7 +25,9 @@ class Program
 
     private static void ConfigureServices(WebApplicationBuilder builder)
     {
-        string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING") ?? "";
+        string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")
+            ?? throw new InvalidOperationException("CONNECTION_STRING environment variable is required");
+
         builder.Services.AddDbContext<DatabaseContext>(option =>
         {
             option.UseSqlServer(connectionString);
@@ -36,7 +38,6 @@ class Program
         ServiceProvider.ConfigureServices(builder);
         UseCaseProvider.ConfigureServices(builder);
 
-        builder.Services.AddControllers();
         builder.Services.AddOpenApi();
         builder.Services.AddControllers()
             .AddJsonOptions(opt =>
@@ -49,20 +50,16 @@ class Program
     {
         var app = builder.Build();
         app.Environment.ApplicationName = "FirstNETWebApp";
-        app.Environment.EnvironmentName = "Development";
         return app;
     }
 
     private static void ConfigureApp(WebApplication app)
     {
-        if (app.Environment.IsDevelopment())
+        app.MapOpenApi();
+        app.UseSwaggerUi(options =>
         {
-            app.MapOpenApi();
-            app.UseSwaggerUi(options =>
-            {
-                options.DocumentPath = "/openapi/v1.json";
-            });
-        }
+            options.DocumentPath = "/openapi/v1.json";
+        });
         app.MapGet("/", () => "Hello World!");
         // app.UseHttpsRedirection();
         app.MapControllers();
