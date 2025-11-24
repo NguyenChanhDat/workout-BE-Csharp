@@ -7,22 +7,30 @@ class Program
 {
     static void Main(string[] args)
     {
+        var builder = CreateBuilder(args);
+        ConfigureServices(builder);
+        var app = BuildApp(builder);
+        ConfigureApp(app);
+        app.Run(GetAppUrl());
+    }
 
-        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+    private static WebApplicationBuilder CreateBuilder(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
         var root = Directory.GetCurrentDirectory();
         var dotenvPath = Path.Combine(root, "..", ".env");
-
-        Console.WriteLine("Loading .env from: " + dotenvPath);
-
         DotEnv.Load(new DotEnvOptions(envFilePaths: [dotenvPath]));
+        return builder;
+    }
 
-        string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING") ?? "";
-        string port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+    private static void ConfigureServices(WebApplicationBuilder builder)
+    {
+        string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")
+            ?? throw new InvalidOperationException("CONNECTION_STRING environment variable is required");
+
         builder.Services.AddDbContext<DatabaseContext>(option =>
         {
-
             option.UseSqlServer(connectionString);
-            Console.WriteLine("Database connected: " + option.IsConfigured);
         });
 
         // DI Configuration
@@ -30,36 +38,36 @@ class Program
         ServiceProvider.ConfigureServices(builder);
         UseCaseProvider.ConfigureServices(builder);
 
-        builder.Services.AddControllers();
         builder.Services.AddOpenApi();
-
         builder.Services.AddControllers()
             .AddJsonOptions(opt =>
             {
                 opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
+    }
 
-
+    private static WebApplication BuildApp(WebApplicationBuilder builder)
+    {
         var app = builder.Build();
         app.Environment.ApplicationName = "FirstNETWebApp";
-        app.Environment.EnvironmentName = "Development";
+        return app;
+    }
 
-
-        Console.WriteLine("app.Environment.IsDevelopment() " + app.Environment.IsDevelopment());
-        Console.WriteLine("membershipTier: " + MembershipTierEnum.Basic.ToString());
-        if (app.Environment.IsDevelopment())
+    private static void ConfigureApp(WebApplication app)
+    {
+        app.MapOpenApi();
+        app.UseSwaggerUi(options =>
         {
-            app.MapOpenApi();
-            app.UseSwaggerUi(options =>
-            {
-                options.DocumentPath = "/openapi/v1.json";
-            });
-        }
-
-
+            options.DocumentPath = "/openapi/v1.json";
+        });
         app.MapGet("/", () => "Hello World!");
         // app.UseHttpsRedirection();
         app.MapControllers();
-        app.Run($"http://localhost:{port}");
+    }
+
+    private static string GetAppUrl()
+    {
+        string port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+        return $"http://localhost:{port}";
     }
 }

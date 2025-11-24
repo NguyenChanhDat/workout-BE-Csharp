@@ -7,12 +7,12 @@ public static class InfrastructureProvider
 
 
         // For register EF repository
-        builder.Services.AddSingleton<IUnitOfWork, EfUnitOfWork>();
-        builder.Services.AddSingleton<IExerciseRepository, EfExerciseRepository>();
-        builder.Services.AddSingleton<IBodyTrackRepository, EfBodyTrackRepository>();
-        builder.Services.AddSingleton<ISessionRepository, EfSessionRepository>();
-        builder.Services.AddSingleton<ISetRepository, EfSetRepository>();
-        builder.Services.AddSingleton<IUserRepository, EfUserRepository>();
+        builder.Services.AddScoped<IUnitOfWork, EfUnitOfWork>();
+        builder.Services.AddScoped<IExerciseRepository, EfExerciseRepository>();
+        builder.Services.AddScoped<IBodyTrackRepository, EfBodyTrackRepository>();
+        builder.Services.AddScoped<ISessionRepository, EfSessionRepository>();
+        builder.Services.AddScoped<ISetRepository, EfSetRepository>();
+        builder.Services.AddScoped<IUserRepository, EfUserRepository>();
 
         // For register other providers like AWS, ...
         builder.Services.AddSingleton<IHashService, ASPHashService>();
