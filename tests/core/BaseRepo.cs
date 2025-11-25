@@ -63,7 +63,7 @@ public class BaseRepoTest
         var mockUserRepository = new Mock<IBaseRepository<User>>();
         var newUser = new User { Username = "NewUser", Email = "new@example.com", Password = "hashed" };
         var createdUser = new User { Id = 1, Username = "NewUser", Email = "new@example.com", Password = "hashed" };
-        
+
         mockUserRepository.Setup(r => r.Create(newUser)).ReturnsAsync(createdUser);
 
         var result = await mockUserRepository.Object.Create(newUser);
@@ -78,7 +78,7 @@ public class BaseRepoTest
     {
         var mockUserRepository = new Mock<IBaseRepository<User>>();
         var user = new User { Id = 1, Username = "UpdatedUser", Email = "updated@example.com", Password = "hashed" };
-        
+
         mockUserRepository.Setup(r => r.Update(user)).Returns(Task.CompletedTask);
 
         await mockUserRepository.Object.Update(user);

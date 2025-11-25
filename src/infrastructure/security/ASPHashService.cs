@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-class ASPHashService : IHashService
+public class ASPHashService : IHashService
 {
     private readonly PasswordHasher<object> _hasher = new();
 
