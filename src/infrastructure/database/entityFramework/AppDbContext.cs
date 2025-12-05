@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+namespace FirstNETWebApp.Infrastructure.Database.EntityFramework;
+
 public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options)
 {
     public virtual DbSet<BodyTrack> BodyTracks { get; set; }

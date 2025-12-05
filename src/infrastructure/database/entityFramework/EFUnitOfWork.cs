@@ -1,3 +1,5 @@
+namespace FirstNETWebApp.Infrastructure.Database.EntityFramework;
+
 public class EfUnitOfWork(DatabaseContext _context) : IUnitOfWork
 {
     public async Task ExecuteAsync(Func<Task> operation)

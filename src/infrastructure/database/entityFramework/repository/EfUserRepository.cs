@@ -1,3 +1,4 @@
+namespace FirstNETWebApp.Infrastructure.Database.EntityFramework.Repository;
 
 class EfUserRepository(DatabaseContext context) : EFBaseRepository<User>(context), IUserRepository
 {

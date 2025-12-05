@@ -1,6 +1,8 @@
 // Program.cs
 using System.Text.Json.Serialization;
 using dotenv.net;
+using FirstNETWebApp.Infrastructure.Database.EntityFramework;
+using FirstNETWebApp.Infrastructure.Provider;
 using Microsoft.EntityFrameworkCore;
 
 class Program
@@ -35,7 +37,7 @@ class Program
 
         // DI Configuration
         InfrastructureProvider.ConfigureServices(builder);
-        ServiceProvider.ConfigureServices(builder);
+        FirstNETWebApp.Infrastructure.Provider.ServiceProvider.ConfigureServices(builder);
         UseCaseProvider.ConfigureServices(builder);
 
         builder.Services.AddOpenApi();

@@ -1,3 +1,5 @@
+namespace FirstNETWebApp.Infrastructure.Provider;
+
 public static class ServiceProvider
 {
     public static void ConfigureServices(WebApplicationBuilder builder)
