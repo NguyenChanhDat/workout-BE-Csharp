@@ -1,5 +1,5 @@
+using System.Reflection;
 using FirstNETWebApp.Infrastructure.Database.EntityFramework;
-using FirstNETWebApp.Infrastructure.Database.EntityFramework.Repository;
 
 namespace FirstNETWebApp.Infrastructure.Provider;
 
@@ -10,16 +10,20 @@ public static class InfrastructureProvider
         // For register background tasks like SQS, ...
         // builder.Services.AddHostedService<>();
 
-
-        // For register EF repository
+        // Register EF unit of work explicitly
         builder.Services.AddScoped<IUnitOfWork, EfUnitOfWork>();
-        builder.Services.AddScoped<IExerciseRepository, EfExerciseRepository>();
-        builder.Services.AddScoped<IBodyTrackRepository, EfBodyTrackRepository>();
-        builder.Services.AddScoped<ISessionRepository, EfSessionRepository>();
-        builder.Services.AddScoped<ISetRepository, EfSetRepository>();
-        builder.Services.AddScoped<IUserRepository, EfUserRepository>();
 
-        // For register other providers like AWS, ...
+        // Scan and register concrete repository/service implementations under our infrastructure namespaces
+        builder.Services.Scan(selector => selector
+            .FromAssemblies(Assembly.GetExecutingAssembly())
+            .AddClasses(classSelector => classSelector.InNamespaces(
+                    "FirstNETWebApp.Infrastructure.Database.EntityFramework.Repository",
+                    "FirstNETWebApp.Infrastructure.Database.EntityFramework"
+                ))
+            .AsImplementedInterfaces()
+            .WithScopedLifetime());
+
+        // For register other providers like AWS, ... (kept explicit registration for clarity)
         builder.Services.AddSingleton<IHashService, ASPHashService>();
     }
 }
