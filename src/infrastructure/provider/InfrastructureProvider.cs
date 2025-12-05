@@ -1,3 +1,8 @@
+using FirstNETWebApp.Infrastructure.Database.EntityFramework;
+using FirstNETWebApp.Infrastructure.Database.EntityFramework.Repository;
+
+namespace FirstNETWebApp.Infrastructure.Provider;
+
 public static class InfrastructureProvider
 {
     public static void ConfigureServices(WebApplicationBuilder builder)

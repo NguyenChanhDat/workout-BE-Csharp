@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
+namespace FirstNETWebApp.Infrastructure.Database.EntityFramework;
+
 public class EFBaseRepository<Entity>(DatabaseContext context) : IBaseRepository<Entity> where Entity : class
 {
     protected readonly DbSet<Entity> _dbSet = context.Set<Entity>();
