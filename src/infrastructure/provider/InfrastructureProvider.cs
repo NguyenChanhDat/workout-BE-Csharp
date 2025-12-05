@@ -10,9 +10,6 @@ public static class InfrastructureProvider
         // For register background tasks like SQS, ...
         // builder.Services.AddHostedService<>();
 
-        // Register EF unit of work explicitly
-        builder.Services.AddScoped<IUnitOfWork, EfUnitOfWork>();
-
         // Scan and register concrete repository/service implementations under our infrastructure namespaces
         builder.Services.Scan(selector => selector
             .FromAssemblies(Assembly.GetExecutingAssembly())
