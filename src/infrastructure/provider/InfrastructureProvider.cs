@@ -13,10 +13,13 @@ public static class InfrastructureProvider
         // Scan and register concrete repository/service implementations under our infrastructure namespaces
         builder.Services.Scan(selector => selector
             .FromAssemblies(Assembly.GetExecutingAssembly())
-            .AddClasses(classSelector => classSelector.InNamespaces(
+            .AddClasses(classSelector => classSelector
+                .InNamespaces(
                     "FirstNETWebApp.Infrastructure.Database.EntityFramework.Repository",
                     "FirstNETWebApp.Infrastructure.Database.EntityFramework"
-                ))
+                ),
+                publicOnly: false
+            )
             .AsImplementedInterfaces()
             .WithScopedLifetime());
 
