@@ -5,6 +5,10 @@ namespace FirstNETWebApp.Infrastructure.Provider;
 
 public static class InfrastructureProvider
 {
+    /// <summary>
+    /// Register dependency-injection services required by the infrastructure layer (repositories, unit of work, and other providers).
+    /// </summary>
+    /// <param name="builder">The WebApplicationBuilder whose services will be configured for the infrastructure layer.</param>
     public static void ConfigureServices(WebApplicationBuilder builder)
     {
         // For register background tasks like SQS, ...
