@@ -6,12 +6,10 @@ public class UnitOfWorkDecorator<TRequest, TResponse>(IMutationUseCase<TRequest,
 {
     public async Task<TResponse> ExecuteAsync(TRequest request)
     {
-        TResponse result = default!;
+        // TResponse result = default!;
         await _validator.ValidateCheapAsync(request);
-        await _unitOfWork.ExecuteAsync(async () =>
-        {
-            result = await _inner.ExecuteAsync(request);
-        });
-        return result;
+        return await _unitOfWork.ExecuteAsync(
+            () => _inner.ExecuteAsync(request)
+        );
     }
 }
