@@ -2,14 +2,15 @@ namespace FirstNETWebApp.Infrastructure.Database.EntityFramework;
 
 public class EfUnitOfWork(DatabaseContext _context) : IUnitOfWork
 {
-    public async Task ExecuteAsync(Func<Task> operation)
+    public async Task<TResponse> ExecuteAsync<TResponse>(Func<Task<TResponse>> operation)
     {
         using var transaction = await _context.Database.BeginTransactionAsync();
         try
         {
-            await operation();
+            TResponse result = await operation();
             await _context.SaveChangesAsync();
             await transaction.CommitAsync();
+            return result;
         }
         catch
         {
