@@ -39,7 +39,6 @@ class Program
         InfrastructureProvider.ConfigureServices(builder);
         FirstNETWebApp.Infrastructure.Provider.ServiceProvider.ConfigureServices(builder);
         UseCaseProvider.ConfigureServices(builder);
-
         builder.Services.AddOpenApi();
         builder.Services.AddControllers()
             .AddJsonOptions(opt =>
