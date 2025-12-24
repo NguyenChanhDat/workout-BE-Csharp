@@ -5,8 +5,8 @@ namespace FirstNETWebApp.UseCase;
 
 class CreateUserValidator(ICreateUserService _createUserService) : IValidator<CreateUserRequest>
 {
-    public async Task ValidateCheapAsync(CreateUserRequest request)
+    public async Task CheaplyValidateAsync(CreateUserRequest request)
     {
-        await _createUserService.ValidateAsync(request);
+        await _createUserService.CheaplyValidateAsync(request);
     }
 }

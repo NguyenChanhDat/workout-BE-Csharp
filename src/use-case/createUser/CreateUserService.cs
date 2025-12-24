@@ -2,7 +2,7 @@ namespace FirstNETWebApp.Services;
 
 public class CreateUserService(IUserRepository _userRepository, IHashService _hashService) : ICreateUserService
 {
-    public async Task ValidateAsync(CreateUserRequest request)
+    public async Task CheaplyValidateAsync(CreateUserRequest request)
     {
         // lightweight validation outside transaction
         if (string.IsNullOrWhiteSpace(request.Username)) throw new ArgumentException("Username is required");
