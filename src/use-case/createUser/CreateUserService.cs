@@ -2,15 +2,6 @@ namespace FirstNETWebApp.Services;
 
 public class CreateUserService(IUserRepository _userRepository, IHashService _hashService) : ICreateUserService
 {
-    public async Task CheaplyValidateAsync(CreateUserRequest request)
-    {
-        // lightweight validation outside transaction
-        if (string.IsNullOrWhiteSpace(request.Username)) throw new ArgumentException("Username is required");
-        if (string.IsNullOrWhiteSpace(request.Password)) throw new ArgumentException("Password is required");
-        if (string.IsNullOrWhiteSpace(request.Email)) throw new ArgumentException("Email is required");
-        await Task.CompletedTask;
-    }
-
     public async Task<CreateUserResponse> HandleAsync(CreateUserRequest request)
     {
         // This runs inside a transaction (decorator will ensure that)
