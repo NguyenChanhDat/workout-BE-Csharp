@@ -56,6 +56,20 @@ class Program
 
     private static void ConfigureApp(WebApplication app)
     {
+        // Exception handling: convert ArgumentException to 400 Bad Request with message
+        app.Use(async (context, next) =>
+        {
+            try
+            {
+                await next();
+            }
+            catch (ArgumentException ex)
+            {
+                context.Response.StatusCode = 400;
+                await context.Response.WriteAsJsonAsync(new { error = ex.Message });
+            }
+        });
+
         app.MapOpenApi();
         app.UseSwaggerUi(options =>
         {
