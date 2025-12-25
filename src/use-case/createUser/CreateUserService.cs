@@ -1,3 +1,5 @@
+using FirstNETWebApp.UseCase.CreateUser.Dtos;
+
 namespace FirstNETWebApp.Services;
 
 public class CreateUserService(IUserRepository _userRepository, IHashService _hashService) : ICreateUserService
