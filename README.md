@@ -40,3 +40,7 @@ dotnet run --project .\src\FirstNETWebApp.csproj
 ```bash
 dotnet test .\tests\FirstNETWebApp.Tests.csproj
 ```
+
+## OTHER RULES, CODING PRINCINPLES, SYSTEM ARCHITECTURE....
+
+Please check ./doc for more informations
