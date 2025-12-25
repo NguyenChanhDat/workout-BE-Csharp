@@ -1,9 +1,10 @@
+using FirstNETWebApp.UseCase.Base.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 namespace FirstNETWebApp.presentation.restful.UserControllers
 {
     [Route("api/user")]
     [ApiController]
-    public class UserController(IUseCase<CreateUserRequest, CreateUserResponse> createUserUseCase) : ControllerBase
+    public class UserController(IMutationUseCase<CreateUserRequest, CreateUserResponse> createUserUseCase) : ControllerBase
     {
         [HttpPost]
         public async Task<ActionResult<CreateUserResponse>> PostUser(CreateUserRequest createUserRequest)

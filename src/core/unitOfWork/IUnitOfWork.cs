@@ -1,4 +1,4 @@
 public interface IUnitOfWork
 {
-    Task ExecuteAsync(Func<Task> operation);
+    Task<T> ExecuteAsync<T>(Func<Task<T>> action);
 }
