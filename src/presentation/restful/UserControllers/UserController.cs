@@ -5,13 +5,13 @@ namespace FirstNETWebApp.presentation.restful.UserControllers;
 
 [Route("api/user")]
 [ApiController]
-public class UserController(IMutationUseCase<CreateUserRequest, CreateUserResponse> createUserUseCase) : ControllerBase
+public class UserController(IMutationUseCase<CreateUserRequest, User> createUserUseCase) : ControllerBase
 {
     [HttpPost]
     public async Task<ActionResult<CreateUserResponse>> PostUser(CreateUserRequest createUserRequest)
     {
         var response = await createUserUseCase.ExecuteAsync(createUserRequest);
-        return response;
+        return new CreateUserResponse(response.Id, response.Username, response.Email, response.MembershipTier);
     }
     // // GET: api/User
     // [HttpGet]

@@ -4,7 +4,7 @@ namespace FirstNETWebApp.Services;
 
 public class CreateUserService(IUserRepository _userRepository, IHashService _hashService) : ICreateUserService
 {
-    public async Task<CreateUserResponse> HandleAsync(CreateUserRequest request)
+    public async Task<User> HandleAsync(CreateUserRequest request)
     {
         // This runs inside a transaction (decorator will ensure that)
         var passwordHashed = await _hashService.HashPassword(request.Password);
@@ -15,7 +15,6 @@ public class CreateUserService(IUserRepository _userRepository, IHashService _ha
             Password = passwordHashed,
             MembershipTier = request.MembershipTier ?? MembershipTierEnum.Basic
         }) ?? throw new Exception("User creation failed");
-
-        return new CreateUserResponse(user.Id, user.Username, user.Email, user.MembershipTier);
+        return user;
     }
 }
