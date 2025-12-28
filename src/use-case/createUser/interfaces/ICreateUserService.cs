@@ -4,5 +4,5 @@ namespace FirstNETWebApp.Services;
 
 public interface ICreateUserService
 {
-    Task<CreateUserResponse> HandleAsync(CreateUserRequest request);
+    Task<User> HandleAsync(CreateUserRequest request);
 }

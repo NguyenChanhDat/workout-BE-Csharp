@@ -10,6 +10,7 @@ public class EfUnitOfWork(DatabaseContext _context) : IUnitOfWork
             TResponse result = await operation();
             await _context.SaveChangesAsync();
             await transaction.CommitAsync();
+            Console.WriteLine("Transaction committed successfully with Result: " + result?.ToString());
             return result;
         }
         catch
