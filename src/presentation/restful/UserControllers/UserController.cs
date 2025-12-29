@@ -1,11 +1,12 @@
 using FirstNETWebApp.UseCase.Base.Interfaces;
 using FirstNETWebApp.UseCase.CreateUser.Dtos;
+using FirstNETWebApp.UseCase.GetUsers.Dtos;
 using Microsoft.AspNetCore.Mvc;
 namespace FirstNETWebApp.presentation.restful.UserControllers;
 
 [Route("api/user")]
 [ApiController]
-public class UserController(IMutationUseCase<CreateUserRequest, User> createUserUseCase) : ControllerBase
+public class UserController(IMutationUseCase<CreateUserRequest, User> createUserUseCase, IQueryUseCase<GetUsersRequest, List<UserSummary>> getUsersUseCase) : ControllerBase
 {
     [HttpPost]
     public async Task<ActionResult<CreateUserResponse>> PostUser(CreateUserRequest createUserRequest)
@@ -13,12 +14,13 @@ public class UserController(IMutationUseCase<CreateUserRequest, User> createUser
         var response = await createUserUseCase.ExecuteAsync(createUserRequest);
         return new CreateUserResponse(response.Id, response.Username, response.Email, response.MembershipTier);
     }
-    // // GET: api/User
-    // [HttpGet]
-    // public async Task<ActionResult<IEnumerable<User>>> GetUsers()
-    // {
-    //     return await _context.Users.ToListAsync();
-    // }
+    // GET: api/User
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<UserSummary>>> GetUsers()
+    {
+        var users = await getUsersUseCase.ExecuteAsync(new GetUsersRequest());
+        return users;
+    }
 
     // // GET: api/User/5
     // [HttpGet("{id}")]

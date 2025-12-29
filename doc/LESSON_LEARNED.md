@@ -28,3 +28,9 @@ For example:
 
 Mutations return entities; controllers return DTOs.
 
+
+# Return surplus nested entities
+Never return EF entities from controllers. Ever.
+
+not because EF is bad
+but because entities are graphs, not messages
