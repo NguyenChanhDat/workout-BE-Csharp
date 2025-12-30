@@ -5,7 +5,7 @@ using Moq;
 public class BaseRepoTest
 {
     [TestMethod]
-    public async Task TestMethod()
+    public async Task TestBaseRepository()
     {
         var mockUserRepository = new Mock<IBaseRepository<User>>();
         mockUserRepository.Setup(r => r.GetAll()).ReturnsAsync(new List<User>
