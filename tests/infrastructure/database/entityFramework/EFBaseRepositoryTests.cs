@@ -22,19 +22,19 @@ public class EFBaseRepositoryTests
         // Arrange
         using var context = CreateInMemoryContext();
         var repository = new EFBaseRepository<User>(context);
-        
-        var user1 = new User 
-        { 
-            Id = 1, 
-            Username = "user1", 
+
+        var user1 = new User
+        {
+            Id = 1,
+            Username = "user1",
             Email = "user1@example.com",
             Password = "password1",
             MembershipTier = MembershipTierEnum.Basic
         };
-        var user2 = new User 
-        { 
-            Id = 2, 
-            Username = "user2", 
+        var user2 = new User
+        {
+            Id = 2,
+            Username = "user2",
             Email = "user2@example.com",
             Password = "password2",
             MembershipTier = MembershipTierEnum.High
@@ -44,11 +44,11 @@ public class EFBaseRepositoryTests
         await context.SaveChangesAsync();
 
         // Act
-        var results = await repository.GetAll(u => new 
-        { 
-            u.Id, 
-            u.Username, 
-            u.Email 
+        var results = await repository.GetAll(u => new
+        {
+            u.Id,
+            u.Username,
+            u.Email
         });
 
         // Assert
@@ -68,11 +68,11 @@ public class EFBaseRepositoryTests
         // Arrange
         using var context = CreateInMemoryContext();
         var repository = new EFBaseRepository<User>(context);
-        
-        var user = new User 
-        { 
-            Id = 1, 
-            Username = "testuser", 
+
+        var user = new User
+        {
+            Id = 1,
+            Username = "testuser",
             Email = "test@example.com",
             Password = "secretpassword",
             MembershipTier = MembershipTierEnum.Basic
@@ -111,11 +111,11 @@ public class EFBaseRepositoryTests
         // Arrange
         using var context = CreateInMemoryContext();
         var repository = new EFBaseRepository<User>(context);
-        
-        var user = new User 
-        { 
-            Id = 1, 
-            Username = "tracktest", 
+
+        var user = new User
+        {
+            Id = 1,
+            Username = "tracktest",
             Email = "track@example.com",
             Password = "password",
             MembershipTier = MembershipTierEnum.Basic
@@ -123,13 +123,13 @@ public class EFBaseRepositoryTests
 
         context.Users.Add(user);
         await context.SaveChangesAsync();
-        
+
         // Clear change tracker to start with clean state
         context.ChangeTracker.Clear();
 
         // Act - Get with projection (uses AsNoTracking)
         var projectedResults = await repository.GetAll(u => new { u.Id, u.Username });
-        
+
         // Verify no entities are tracked after the query with projection
         var trackedEntitiesAfterProjection = context.ChangeTracker.Entries<User>().Count();
 
@@ -137,7 +137,7 @@ public class EFBaseRepositoryTests
         Assert.AreEqual(1, projectedResults.Count);
         Assert.AreEqual("tracktest", projectedResults[0].Username);
         // AsNoTracking should ensure no entities are tracked
-        Assert.AreEqual(0, trackedEntitiesAfterProjection, 
+        Assert.AreEqual(0, trackedEntitiesAfterProjection,
             "AsNoTracking should prevent entity tracking when using selector");
     }
 
@@ -147,11 +147,11 @@ public class EFBaseRepositoryTests
         // Arrange
         using var context = CreateInMemoryContext();
         var repository = new EFBaseRepository<User>(context);
-        
-        var user = new User 
-        { 
-            Id = 1, 
-            Username = "john", 
+
+        var user = new User
+        {
+            Id = 1,
+            Username = "john",
             Email = "john@example.com",
             Password = "password",
             MembershipTier = MembershipTierEnum.High
@@ -161,8 +161,8 @@ public class EFBaseRepositoryTests
         await context.SaveChangesAsync();
 
         // Act - Use complex transformation in selector
-        var results = await repository.GetAll(u => new 
-        { 
+        var results = await repository.GetAll(u => new
+        {
             DisplayName = u.Username.ToUpper(),
             EmailDomain = u.Email.Substring(u.Email.IndexOf("@") + 1),
             IsHighTier = u.MembershipTier == MembershipTierEnum.High
@@ -182,14 +182,14 @@ public class EFBaseRepositoryTests
         // Arrange
         using var context = CreateInMemoryContext();
         var repository = new EFBaseRepository<User>(context);
-        
+
         // Add 10 users
         for (int i = 1; i <= 10; i++)
         {
-            context.Users.Add(new User 
-            { 
-                Id = i, 
-                Username = $"user{i}", 
+            context.Users.Add(new User
+            {
+                Id = i,
+                Username = $"user{i}",
                 Email = $"user{i}@example.com",
                 Password = $"password{i}",
                 MembershipTier = i % 2 == 0 ? MembershipTierEnum.High : MembershipTierEnum.Basic
@@ -203,10 +203,10 @@ public class EFBaseRepositoryTests
         // Assert
         Assert.IsNotNull(results);
         Assert.AreEqual(10, results.Count);
-        
+
         var highTierCount = results.Count(r => r.MembershipTier == MembershipTierEnum.High);
         var basicCount = results.Count(r => r.MembershipTier == MembershipTierEnum.Basic);
-        
+
         Assert.AreEqual(5, highTierCount);
         Assert.AreEqual(5, basicCount);
     }
