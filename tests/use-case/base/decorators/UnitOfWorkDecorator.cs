@@ -10,7 +10,7 @@ public class UnitOfWorkDecorator
 {
 
     [TestMethod]
-    public async Task TestMethod()
+    public async Task TestUnitOfWorkDecorator()
     {
         // Arrange
         var validator = new Mock<IValidator<CreateUserRequest>>();

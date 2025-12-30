@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
 namespace FirstNETWebApp.Infrastructure.Database.EntityFramework;
@@ -20,6 +21,16 @@ public class EFBaseRepository<Entity>(DatabaseContext context) : IBaseRepository
             this._dbSet.Remove(entity);
         }
         return entity;
+    }
+
+    public async Task<List<Result>> GetAll<Result>(
+        Expression<Func<Entity, Result>> selector
+    )
+    {
+        return await this._dbSet
+            .AsNoTracking()
+            .Select(selector)
+            .ToListAsync();
     }
 
     public async Task<List<Entity>> GetAll()
