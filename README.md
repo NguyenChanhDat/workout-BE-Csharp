@@ -38,7 +38,7 @@ dotnet run --project .\src\FirstNETWebApp.csproj
 ### Unit testing
 
 ```bash
-dotnet test .\tests\FirstNETWebApp.Tests.csproj
+dotnet test .\tests\FirstNETWebApp.Tests.csproj --logger "console;verbosity=detailed"
 ```
 
 ## OTHER RULES, CODING PRINCINPLES, SYSTEM ARCHITECTURE....
