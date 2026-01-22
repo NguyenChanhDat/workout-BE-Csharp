@@ -20,5 +20,23 @@ public class PlanEntityTypeConfiguration : IEntityTypeConfiguration<Plan>
             .HasForeignKey(d => d.UserId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("FK_Plans_Users");
+
+        builder.HasData(
+            new Plan
+            {
+                Id = 1,
+                Name = "beginner strength",
+                MembershipTier = "basic",
+                UserId = 1
+            },
+            new Plan
+            {
+                Id = 2,
+                Name = "upper body focus",
+                MembershipTier = "basic",
+                UserId = 2
+            }
+        );
+
     }
 }

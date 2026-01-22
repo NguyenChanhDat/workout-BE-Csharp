@@ -17,27 +17,33 @@ A BE Repo for healthcare .NET(CSharp) version (see [TS version](https://github.c
 
 - Install Dotnet
 
-```link
+```http
 https://dotnet.microsoft.com/en-us/download
 ```
 
 - Running Setup
 
-```bash
+```sh
 dotnet restore .\src\FirstNETWebApp.csproj
 ```
 
 ### Start local server
 
-```bash
+```sh
 dotnet run --project .\src\FirstNETWebApp.csproj
+```
+
+### API documents
+
+```http
+http://localhost:{YOUR_PORT}/swagger/index.html?url=/openapi/v1.json
 ```
 
 ## TESTING
 
 ### Unit testing
 
-```bash
+```sh
 dotnet test .\tests\FirstNETWebApp.Tests.csproj --logger "console;verbosity=detailed"
 ```
 

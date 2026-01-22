@@ -23,5 +23,36 @@ public class SetEntityTypeConfiguration : IEntityTypeConfiguration<Set>
             .HasForeignKey(d => d.SessionId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("FK_Sets_Session");
+
+        builder.HasData(
+            new Set
+            {
+                Id = 1,
+                ExerciseId = 1,
+                SessionId = 1,
+                Reps = 10,
+                Weight = 60,
+                RestTime = 90
+            },
+            new Set
+            {
+                Id = 2,
+                ExerciseId = 1,
+                SessionId = 1,
+                Reps = 8,
+                Weight = 65,
+                RestTime = 120
+            },
+            new Set
+            {
+                Id = 3,
+                ExerciseId = 2,
+                SessionId = 2,
+                Reps = 12,
+                Weight = 80,
+                RestTime = 120
+            }
+        );
+
     }
 }

@@ -26,5 +26,11 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(100)
             .HasColumnName("email")
             .IsRequired();
+
+        builder.HasData(
+            new User { Id = 1, Email = "dummyemail1@gmail.com", MembershipTier = MembershipTierEnum.Basic, Username = "dummyUsername1", Password = "akmfsapmfpkmfdsapmfwe" },
+            new User { Id = 2, Email = "dummyemail2@gmail.com", MembershipTier = MembershipTierEnum.Basic, Username = "dummyUsername2", Password = "yiueoipkwemrkwerewerw" },
+            new User { Id = 3, Email = "dummyemail3@gmail.com", MembershipTier = MembershipTierEnum.Basic, Username = "dummyUsername3", Password = "svfsdhkjyuiyuiertetrr" }
+        );
     }
 }

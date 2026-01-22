@@ -2,9 +2,9 @@
 {
     public int Id { get; set; }
 
-    public int Weight { get; set; }
+    public double Weight { get; set; }
 
-    public int Height { get; set; }
+    public double Height { get; set; }
 
     public DateOnly Date { get; set; }
 
