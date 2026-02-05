@@ -1,5 +1,4 @@
 using FirstNETWebApp.Core.Repository;
-using FirstNETWebApp.UseCase.CreateUser.Dtos;
 
 namespace FirstNETWebApp.Services;
 

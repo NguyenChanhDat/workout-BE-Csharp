@@ -1,5 +1,4 @@
 using FirstNETWebApp.UseCase.Base.Interfaces;
-using FirstNETWebApp.UseCase.CreateUser.Dtos;
 namespace FirstNETWebApp.UseCase;
 
 

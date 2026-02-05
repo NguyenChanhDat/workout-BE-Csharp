@@ -1,5 +1,4 @@
 using FirstNETWebApp.UseCase.Base.Interfaces;
-using FirstNETWebApp.UseCase.GetUsers.Dtos;
 
 namespace FirstNETWebApp.UseCase.GetUsers;
 

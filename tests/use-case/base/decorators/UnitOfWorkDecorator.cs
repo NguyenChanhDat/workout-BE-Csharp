@@ -1,5 +1,4 @@
 using FirstNETWebApp.UseCase.Base.Interfaces;
-using FirstNETWebApp.UseCase.CreateUser.Dtos;
 using FirstNETWebApp.UseCase.Decorators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;

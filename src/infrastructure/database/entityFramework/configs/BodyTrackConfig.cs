@@ -17,5 +17,25 @@ public class BodyTrackEntityTypeConfiguration : IEntityTypeConfiguration<BodyTra
             .HasForeignKey(d => d.UserId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .HasConstraintName("FK_BodyTracks_Users");
+
+        builder.HasData(
+            new BodyTrack
+            {
+                Id = 1,
+                UserId = 1,
+                Date = new DateOnly(2025, 1, 1),
+                Height = 186,
+                Weight = 71.1
+            },
+            new BodyTrack
+            {
+                Id = 2,
+                UserId = 2,
+                Date = new DateOnly(2025, 1, 1),
+                Height = 175,
+                Weight = 68.5
+            }
+        );
+
     }
 }

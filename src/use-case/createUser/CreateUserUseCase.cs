@@ -1,6 +1,5 @@
 using FirstNETWebApp.Services;
 using FirstNETWebApp.UseCase.Base.Interfaces;
-using FirstNETWebApp.UseCase.CreateUser.Dtos;
 namespace FirstNETWebApp.UseCase;
 
 public class CreateUserUseCase(ICreateUserService _createUserService) : IMutationUseCase<CreateUserRequest, User>

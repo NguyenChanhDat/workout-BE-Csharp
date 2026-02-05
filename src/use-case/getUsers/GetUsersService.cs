@@ -1,5 +1,4 @@
 using FirstNETWebApp.Core.Repository;
-using FirstNETWebApp.UseCase.GetUsers.Dtos;
 
 namespace FirstNETWebApp.UseCase.GetUsers;
 

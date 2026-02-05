@@ -26,5 +26,26 @@ public class ExerciseEntityTypeConfiguration : IEntityTypeConfiguration<Exercise
             .HasConversion<string>()
             .HasMaxLength(50)
             .HasColumnName("targetMuscle3");
+
+        builder.HasData(
+            new Exercise
+            {
+                Id = 1,
+                Name = "bench press",
+                ImageUrl = "https://example.com/bench.png",
+                TargetMuscle1 = MuscleEnum.Chest,
+                TargetMuscle2 = MuscleEnum.Triceps,
+                TargetMuscle3 = MuscleEnum.Shoulders
+            },
+            new Exercise
+            {
+                Id = 2,
+                Name = "squat",
+                ImageUrl = "https://example.com/squat.png",
+                TargetMuscle1 = MuscleEnum.Quads,
+                TargetMuscle2 = MuscleEnum.Glutes,
+                TargetMuscle3 = null
+            }
+            );
     }
 }

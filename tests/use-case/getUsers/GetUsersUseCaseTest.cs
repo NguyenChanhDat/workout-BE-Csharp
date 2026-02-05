@@ -1,5 +1,4 @@
 using FirstNETWebApp.UseCase.GetUsers;
-using FirstNETWebApp.UseCase.GetUsers.Dtos;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
