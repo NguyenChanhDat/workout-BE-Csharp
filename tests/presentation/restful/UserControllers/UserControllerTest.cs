@@ -1,8 +1,5 @@
 using FirstNETWebApp.presentation.restful.UserControllers;
 using FirstNETWebApp.UseCase.Base.Interfaces;
-using FirstNETWebApp.UseCase.CreateUser.Dtos;
-using FirstNETWebApp.UseCase.GetUsers.Dtos;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

@@ -1,5 +1,3 @@
-using FirstNETWebApp.UseCase.CreateUser.Dtos;
-
 namespace FirstNETWebApp.Services;
 
 public interface ICreateUserService

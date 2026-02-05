@@ -1,3 +1,6 @@
+# restore all nuget packages
+dotnet restore .\src\FirstNETWebApp.csproj
+
 # -----------------------------
 # get connection string from .env file
 # -----------------------------

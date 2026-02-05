@@ -3,7 +3,7 @@
 Author: Dat NguyenChanh
 
 Describe:
-A BE Repo for healthcare .NET(CSharp) version (see [TS version](https://github.com/NguyenChanhDat/workout-tracking-TS) here) services system in TS implements Clean Architecture. You can also view the project's folder structure inside **doc** folder.I also add Unit Test for each Component which stored inside **test** folder. Thanks for viewing this repo, feel free to drop a star if you find this repo helpful :))
+A BE Repo for healthcare .NET(CSharp) version (see [TS version](https://github.com/NguyenChanhDat/workout-tracking-TS) here) services system implements Clean Architecture. You can also view the project's folder structure inside **doc** folder.I also add Unit Test for each Component which stored inside **test** folder. Thanks for viewing this repo, feel free to drop a star if you find this repo helpful :))
 
 ## DEPENDENCY
 
@@ -12,6 +12,15 @@ A BE Repo for healthcare .NET(CSharp) version (see [TS version](https://github.c
 - [.NET](https://dotnet.microsoft.com/en-us)
 
 ## DEVELOPING
+
+### Fill .env file (Don't forget this otherwise setup wont run correctly)
+
+example:
+
+```env
+CONNECTION_STRING=Server=localhost,YOUR_PORT;Database=YOUR_DB_NAME;User Id=YOUR_USER_NAME;Password=YOUR_PASSWORD;TrustServerCertificate=True_OR_False;
+PORT=YOUR_PORT_HERE
+```
 
 ### Setup
 
@@ -24,7 +33,7 @@ https://dotnet.microsoft.com/en-us/download
 - Running Setup
 
 ```sh
-dotnet restore .\src\FirstNETWebApp.csproj
+powershell ./commands/setup.ps1
 ```
 
 ### Start local server

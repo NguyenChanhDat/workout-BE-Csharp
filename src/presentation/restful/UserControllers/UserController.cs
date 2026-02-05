@@ -1,6 +1,4 @@
 using FirstNETWebApp.UseCase.Base.Interfaces;
-using FirstNETWebApp.UseCase.CreateUser.Dtos;
-using FirstNETWebApp.UseCase.GetUsers.Dtos;
 using Microsoft.AspNetCore.Mvc;
 namespace FirstNETWebApp.presentation.restful.UserControllers;
 
